@@ -13,30 +13,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. 코드 체크아웃
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # 2. Python 환경 설정
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.9
 
-      # 3. Python 코드 실행
       - name: Run Python Script
         run: python app.py
 
-      # 4. Docker 설치 (필요한 경우)
-      - name: Set up Docker
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker.io
-
-      # 5. Docker 이미지 빌드
       - name: Build Docker Image
         run: docker build -t ci_project .
 
-      # 6. Docker 컨테이너 실행
       - name: Run Docker Container
         run: docker run --rm ci_project
